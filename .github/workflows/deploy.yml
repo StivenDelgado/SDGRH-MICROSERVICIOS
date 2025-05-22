@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Microservices
 
 on:
   push:
@@ -41,4 +41,63 @@ jobs:
             git fetch --all
             git reset --hard origin/main
             git pull origin main
+
+            # Microservices
+            # backend-check-in
+            if [ ! -d "${PROJECT_PATH}/backend-check-in/.git" ]; then
+              mkdir -p \$(dirname ${PROJECT_PATH}/backend-check-in)
+              git clone ${GIT_REPO_CHECK_IN} ${PROJECT_PATH}/backend-check-in
+            fi
+
+            cd ${PROJECT_PATH}/backend-check-in
+            git checkout develop
+            git fetch --all
+            git reset --hard origin/develop
+            git pull origin develop
+
+            # backend-user 
+            if [ ! -d "${PROJECT_PATH}/backend-user/.git" ]; then
+              mkdir -p \$(dirname ${PROJECT_PATH}/backend-user)
+              git clone ${GIT_REPO_USER} ${PROJECT_PATH}/backend-user
+            fi
+
+            cd ${PROJECT_PATH}/backend-user
+            git checkout develop
+            git fetch --all
+            git reset --hard origin/develop
+            git pull origin develop
+
+            # backend-payroll
+            if [ ! -d "${PROJECT_PATH}/backend-payroll/.git" ]; then
+              mkdir -p \$(dirname ${PROJECT_PATH}/backend-payroll)
+              git clone ${GIT_REPO_PAYROLL} ${PROJECT_PATH}/backend-payroll
+            fi
+
+            cd ${PROJECT_PATH}/backend-payroll
+            git checkout develop
+            git fetch --all
+            git reset --hard origin/develop
+            git pull origin develop
+
+            # backend-goals
+            if [ ! -d "${PROJECT_PATH}/backend-goals/.git" ]; then
+              mkdir -p \$(dirname ${PROJECT_PATH}/backend-goals)
+              git clone ${GIT_REPO_GOALS} ${PROJECT_PATH}/backend-goals
+            fi
+
+            cd ${PROJECT_PATH}/backend-goals
+            git checkout develop
+            git fetch --all
+            git reset --hard origin/develop
+            git pull origin develop 
+
+
+            cd ${PROJECT_PATH}
+
+            make remove-network
+            make create-network
+
+            make down-all
+            make up-all
+          
           EOF
