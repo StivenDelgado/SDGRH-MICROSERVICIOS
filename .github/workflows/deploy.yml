@@ -94,14 +94,5 @@ jobs:
             git fetch --all
             git reset --hard origin/develop
             git pull origin develop 
-
-
-            cd ${PROJECT_PATH}
-
-            make remove-network
-            make create-network
-
-            make down-all
-            make up-all
           
           EOF
