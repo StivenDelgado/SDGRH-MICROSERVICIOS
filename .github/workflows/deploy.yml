@@ -18,6 +18,10 @@ jobs:
           USER_NAME: ${{ secrets.USER_NAME }}
           PROJECT_PATH: ${{ secrets.PROJECT_PATH }}
           GIT_REPO: ${{ secrets.GIT_REPO }}
+          GIT_REPO_CHECK_IN: ${{ secrets.GIT_REPO_CHECK_IN }}
+          GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+          GIT_REPO_PAYROLL: ${{ secrets.GIT_REPO_PAYROLL }}
+          GIT_REPO_GOALS: ${{ secrets.GIT_REPO_GOALS }}
         run: |
           # Create .ssh directory
           mkdir -p ~/.ssh
